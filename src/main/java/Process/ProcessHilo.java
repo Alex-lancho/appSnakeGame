@@ -7,7 +7,8 @@ import javax.swing.JPanel;
 public class ProcessHilo extends Thread {
     private JPanel jpPrincipal,jpCuadro;
     private double ancho,alto;
-    private double randomPositionx,randomPositiony;
+    private static double randomPositionx,randomPositiony;
+    public static boolean estadoBtn=false;
     
     public ProcessHilo(JPanel jpPrincipal,JPanel jpCuadro){
         this.jpPrincipal=jpPrincipal;
@@ -15,22 +16,30 @@ public class ProcessHilo extends Thread {
         
         this.ancho=jpPrincipal.getSize().width;
         this.alto=jpPrincipal.getSize().height; 
-        this.randomPositionx=Math.random()*this.ancho;
-        this.randomPositiony=Math.random()*this.alto;
+        randomPositionx=Math.random()*this.ancho;
+        randomPositiony=Math.random()*this.alto;
     }
     
     @Override
     public void run() {
-        for(int i=0;i<100;i++){
-            System.out.println("x:"+randomPositionx+"- Y:"+randomPositiony);
-            System.out.println("ancho:"+ancho+"- alto:"+alto);
+        posicionCuadro();        
+    }
+    public void posicionCuadro(){        
+        try {
+            while(estadoBtn){
+                this.jpCuadro.setLocation((int)randomPositionx, (int)randomPositiony);
+                Thread.sleep(100); 
+                actualizacionPosicion();
+            }
+                      
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        
     }
-    public void posicionCuadro(){
-       
+    public void actualizacionPosicion(){
+        randomPositionx=Math.random()*this.ancho;
+        randomPositiony=Math.random()*this.alto;
     }
-
     public JPanel getJpPrincipal() {
         return jpPrincipal;
     }

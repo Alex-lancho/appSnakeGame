@@ -5,7 +5,7 @@ import Process.ProcessHilo;
 
 public class Frame extends javax.swing.JFrame {
 
-    
+    ProcessHilo  proceso;
     public Frame() {
         this.setExtendedState(Frame.MAXIMIZED_BOTH);
         initComponents();
@@ -127,45 +127,32 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-       ProcessHilo  proceso=new ProcessHilo(jpJuego,jpCuadro);
-       proceso.start();
+       verificacionEstadoBtn();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+    public static void main(String args[]) {        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Frame().setVisible(true);
             }
         });
     }
-
+    public void verificacionEstadoBtn(){
+        if(!ProcessHilo.estadoBtn){
+            btnIniciar.setText("Pausar");
+            proceso=new ProcessHilo(jpJuego,jpCuadro);            
+            proceso.start();             
+            ProcessHilo.estadoBtn=true;
+       }else{           
+           ProcessHilo.estadoBtn=false;
+           proceso.setJpPrincipal(jpJuego);
+           btnIniciar.setText("Iniciar");
+       }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel1;
