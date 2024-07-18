@@ -143,12 +143,14 @@ public class Frame extends javax.swing.JFrame {
     public void verificacionEstadoBtn(){
         if(!ProcessHilo.estadoBtn){
             btnIniciar.setText("Pausar");
-            proceso=new ProcessHilo(jpJuego,jpCuadro);            
+            proceso=new ProcessHilo(jpJuego,jpCuadro,txtTiempo); 
+            ProcessHilo.txtTiempo=txtTiempo;
             proceso.start();             
             ProcessHilo.estadoBtn=true;
        }else{           
            ProcessHilo.estadoBtn=false;
            proceso.setJpPrincipal(jpJuego);
+           ProcessHilo.txtTiempo=txtTiempo;
            btnIniciar.setText("Iniciar");
        }
     }
