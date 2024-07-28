@@ -1,11 +1,12 @@
 package Interfaz;
 
 import Process.ProcessHilo;
-
+import Process.Serpiente;
 
 public class Frame extends javax.swing.JFrame {
 
     ProcessHilo  proceso;
+    
     public Frame() {
         this.setExtendedState(Frame.MAXIMIZED_BOTH);
         initComponents();
@@ -19,6 +20,7 @@ public class Frame extends javax.swing.JFrame {
 
         jpJuego = new javax.swing.JPanel();
         jpCuadro = new javax.swing.JPanel();
+        jpSerpiente = new javax.swing.JPanel();
         btnIniciar = new javax.swing.JButton();
         txtPuntos = new javax.swing.JTextField();
         txtTiempo = new javax.swing.JTextField();
@@ -30,18 +32,39 @@ public class Frame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jpJuego.setBackground(new java.awt.Color(0, 0, 0));
+        jpJuego.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                mauseMoved(evt);
+            }
+        });
 
         jpCuadro.setBackground(new java.awt.Color(255, 102, 102));
+        jpCuadro.setPreferredSize(new java.awt.Dimension(20, 20));
 
         javax.swing.GroupLayout jpCuadroLayout = new javax.swing.GroupLayout(jpCuadro);
         jpCuadro.setLayout(jpCuadroLayout);
         jpCuadroLayout.setHorizontalGroup(
             jpCuadroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
+            .addGap(0, 20, Short.MAX_VALUE)
         );
         jpCuadroLayout.setVerticalGroup(
             jpCuadroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        jpSerpiente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jpSerpiente.setForeground(new java.awt.Color(0, 153, 51));
+        jpSerpiente.setPreferredSize(new java.awt.Dimension(20, 20));
+
+        javax.swing.GroupLayout jpSerpienteLayout = new javax.swing.GroupLayout(jpSerpiente);
+        jpSerpiente.setLayout(jpSerpienteLayout);
+        jpSerpienteLayout.setHorizontalGroup(
+            jpSerpienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 18, Short.MAX_VALUE)
+        );
+        jpSerpienteLayout.setVerticalGroup(
+            jpSerpienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 18, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpJuegoLayout = new javax.swing.GroupLayout(jpJuego);
@@ -49,16 +72,21 @@ public class Frame extends javax.swing.JFrame {
         jpJuegoLayout.setHorizontalGroup(
             jpJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpJuegoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(jpCuadro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpJuegoLayout.createSequentialGroup()
+                .addComponent(jpSerpiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpJuegoLayout.setVerticalGroup(
             jpJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpJuegoLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jpCuadro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addGap(89, 89, 89)
+                .addComponent(jpSerpiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         btnIniciar.setText("Iniciar");
@@ -130,6 +158,11 @@ public class Frame extends javax.swing.JFrame {
        verificacionEstadoBtn();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
+    private void mauseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mauseMoved
+        Serpiente.xObjetivo=evt.getX()-(jpSerpiente.getSize().width/2);
+        Serpiente.yObjetivo=evt.getY()-(jpSerpiente.getSize().height/2);
+    }//GEN-LAST:event_mauseMoved
+
     /**
      * @param args the command line arguments
      */
@@ -143,7 +176,7 @@ public class Frame extends javax.swing.JFrame {
     public void verificacionEstadoBtn(){
         if(!ProcessHilo.estadoBtn){
             btnIniciar.setText("Pausar");
-            proceso=new ProcessHilo(jpJuego,jpCuadro,txtTiempo); 
+            proceso=new ProcessHilo(jpJuego,jpCuadro,jpSerpiente); 
             ProcessHilo.txtTiempo=txtTiempo;
             proceso.start();             
             ProcessHilo.estadoBtn=true;
@@ -162,7 +195,8 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jpCuadro;
     private javax.swing.JPanel jpJuego;
-    private javax.swing.JTextField txtNivel;
+    private javax.swing.JPanel jpSerpiente;
+    public static javax.swing.JTextField txtNivel;
     private javax.swing.JTextField txtPuntos;
     private javax.swing.JTextField txtTiempo;
     // End of variables declaration//GEN-END:variables

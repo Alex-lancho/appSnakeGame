@@ -12,15 +12,19 @@ public class ProcessHilo extends Thread {
     private double ancho,alto;
     private static double randomPositionx,randomPositiony;
     public static boolean estadoBtn=false;
-    
-    public ProcessHilo(JPanel jpPrincipal,JPanel jpCuadro,JTextField txtTiempo){
+    public JPanel jpSerpiente;
+    public ProcessHilo(){}
+    public ProcessHilo(JPanel jpPrincipal,JPanel jpCuadro,JPanel jpSerpiente){
         this.jpPrincipal=jpPrincipal;
-        this.jpCuadro=jpCuadro;        
+        this.jpCuadro=jpCuadro; 
+        this.jpSerpiente=jpSerpiente;
         
         this.ancho=jpPrincipal.getSize().width;
         this.alto=jpPrincipal.getSize().height; 
         randomPositionx=Math.random()*this.ancho;
         randomPositiony=Math.random()*this.alto;
+        
+        new Serpiente(jpSerpiente,jpCuadro,this.ancho,this.alto).start();
     }
     
     @Override
@@ -36,8 +40,7 @@ public class ProcessHilo extends Thread {
                 startTime = System.currentTimeMillis();
                 Tiempo t=new Tiempo((int)tiempoDuracion);
                 t.start();
-                TimeUnit.SECONDS.sleep(tiempoDuracion);
-                
+                TimeUnit.SECONDS.sleep(tiempoDuracion);                
                 actualizacionPosicion();              
             }            
             startTime=0;          
@@ -53,6 +56,10 @@ public class ProcessHilo extends Thread {
     public void actualizacionPosicion(){
         randomPositionx=Math.random()*this.ancho;
         randomPositiony=Math.random()*this.alto;
+        if(jpSerpiente.getX()==randomPositionx && jpSerpiente.getY()==randomPositiony){
+            randomPositionx=Math.random()*this.ancho;
+            randomPositiony=Math.random()*this.alto;
+        }
     }
     public JPanel getJpPrincipal() {
         return jpPrincipal;
@@ -80,9 +87,8 @@ class Tiempo extends Thread {
     }
     
     @Override
-    public void run() {
-         this.time--;
-         try {
+    public void run() {         
+        try {
              while(this.time!=0){           
                 TimeUnit.SECONDS.sleep(1);
                 ProcessHilo.txtTiempo.setText(""+(this.time--));
