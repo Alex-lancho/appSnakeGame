@@ -9,22 +9,21 @@ import javax.swing.JTextField;
 public class ProcessHilo extends Thread {
     private JPanel jpPrincipal,jpCuadro;
     public static JTextField txtTiempo;
-    private double ancho,alto;
-    private static double randomPositionx,randomPositiony;
+    public static double ancho,alto;
+    public static double randomPositionx,randomPositiony;
     public static boolean estadoBtn=false;
-    public JPanel jpSerpiente;
-    public ProcessHilo(){}
-    public ProcessHilo(JPanel jpPrincipal,JPanel jpCuadro,JPanel jpSerpiente){
+    public static JPanel jpSerpiente;
+    public ProcessHilo(JPanel jpPrincipal,JPanel jpCuadro,JPanel jpSerpienteE){
         this.jpPrincipal=jpPrincipal;
         this.jpCuadro=jpCuadro; 
-        this.jpSerpiente=jpSerpiente;
+        jpSerpiente=jpSerpienteE;
         
-        this.ancho=jpPrincipal.getSize().width;
-        this.alto=jpPrincipal.getSize().height; 
-        randomPositionx=Math.random()*this.ancho;
-        randomPositiony=Math.random()*this.alto;
+        ancho=jpPrincipal.getSize().width;
+        alto=jpPrincipal.getSize().height; 
+        randomPositionx=Math.random()*ancho;
+        randomPositiony=Math.random()*alto;
         
-        new Serpiente(jpSerpiente,jpCuadro,this.ancho,this.alto).start();
+        new Serpiente(jpSerpiente,jpCuadro,ancho,alto).start();
     }
     
     @Override
@@ -53,12 +52,12 @@ public class ProcessHilo extends Thread {
             txtTiempo.setText(""+(endTime-startTime));
         }        
     }
-    public void actualizacionPosicion(){
-        randomPositionx=Math.random()*this.ancho;
-        randomPositiony=Math.random()*this.alto;
+    public static void actualizacionPosicion(){
+        randomPositionx=Math.random()*ancho;
+        randomPositiony=Math.random()*alto;
         if(jpSerpiente.getX()==randomPositionx && jpSerpiente.getY()==randomPositiony){
-            randomPositionx=Math.random()*this.ancho;
-            randomPositiony=Math.random()*this.alto;
+            randomPositionx=Math.random()*ancho;
+            randomPositiony=Math.random()*alto;
         }
     }
     public JPanel getJpPrincipal() {

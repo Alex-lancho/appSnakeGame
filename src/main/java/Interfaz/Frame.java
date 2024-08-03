@@ -194,10 +194,10 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jpCuadro;
-    private javax.swing.JPanel jpJuego;
+    public static javax.swing.JPanel jpJuego;
     private javax.swing.JPanel jpSerpiente;
     public static javax.swing.JTextField txtNivel;
-    private javax.swing.JTextField txtPuntos;
+    public static javax.swing.JTextField txtPuntos;
     private javax.swing.JTextField txtTiempo;
     // End of variables declaration//GEN-END:variables
 }
