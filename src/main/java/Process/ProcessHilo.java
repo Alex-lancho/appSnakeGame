@@ -1,18 +1,24 @@
 
 package Process;
 
+import Interfaz.Frame;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
 public class ProcessHilo extends Thread {
     private JPanel jpPrincipal,jpCuadro;
-    public static JTextField txtTiempo;
+    public static JLabel txtTiempo;
     public static double ancho,alto;
     public static double randomPositionx,randomPositiony;
     public static boolean estadoBtn=false;
     public static JPanel jpSerpiente;
+    public static long currentTiem;
+    private static int endTime=5;
+    public static int puntosPerdidos=0;
+    
     public ProcessHilo(JPanel jpPrincipal,JPanel jpCuadro,JPanel jpSerpienteE){
         this.jpPrincipal=jpPrincipal;
         this.jpCuadro=jpCuadro; 
@@ -20,45 +26,34 @@ public class ProcessHilo extends Thread {
         
         ancho=jpPrincipal.getSize().width;
         alto=jpPrincipal.getSize().height; 
-        randomPositionx=Math.random()*ancho;
-        randomPositiony=Math.random()*alto;
-        
+        randomPositionx=Math.random()*(ancho-20);
+        randomPositiony=Math.random()*(alto-20);
+        currentTiem=System.currentTimeMillis()/1000;        
         new Serpiente(jpSerpiente,jpCuadro,ancho,alto).start();
     }
     
     @Override
     public void run() {
-        posicionCuadro();        
-    }
-    public void posicionCuadro(){
-        long tiempoDuracion=10;
-        long startTime;        
-        try {
-            while(estadoBtn){
-                this.jpCuadro.setLocation((int)randomPositionx, (int)randomPositiony); 
-                startTime = System.currentTimeMillis();
-                Tiempo t=new Tiempo((int)tiempoDuracion);
-                t.start();
-                TimeUnit.SECONDS.sleep(tiempoDuracion);                
-                actualizacionPosicion();              
-            }            
-            startTime=0;          
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-    public void tiempo(long startTime,long endTime){
-        while(startTime==0){
-            txtTiempo.setText(""+(endTime-startTime));
+        while(estadoBtn){
+            actualizacionPosicion(); 
+            this.jpCuadro.setLocation((int)randomPositionx, (int)randomPositiony);         
         }        
     }
+    
     public static void actualizacionPosicion(){
-        randomPositionx=Math.random()*ancho;
-        randomPositiony=Math.random()*alto;
-        if(jpSerpiente.getX()==randomPositionx && jpSerpiente.getY()==randomPositiony){
-            randomPositionx=Math.random()*ancho;
-            randomPositiony=Math.random()*alto;
-        }
+        long time=System.currentTimeMillis()/1000;
+        ProcessHilo.txtTiempo.setText(""+(endTime-(time-currentTiem)));
+        if((time-currentTiem)==endTime){
+            randomPositionx=Math.random()*(ancho-20);
+            randomPositiony=Math.random()*(alto-20);
+            if(jpSerpiente.getX()==randomPositionx && jpSerpiente.getY()==randomPositiony){
+                randomPositionx=Math.random()*(ancho-20);
+                randomPositiony=Math.random()*(alto-20);
+            }
+            puntosPerdidos++;
+            Frame.txtPuntosPerdidos.setText(""+puntosPerdidos);
+            currentTiem=System.currentTimeMillis()/1000;            
+        }      
     }
     public JPanel getJpPrincipal() {
         return jpPrincipal;
@@ -76,25 +71,4 @@ public class ProcessHilo extends Thread {
         this.jpCuadro = jpCuadro;
     }
     
-}
-
-class Tiempo extends Thread {
-    long time;
-    
-    public Tiempo(long time){
-        this.time=time;
-    }
-    
-    @Override
-    public void run() {         
-        try {
-             while(this.time!=0){           
-                TimeUnit.SECONDS.sleep(1);
-                ProcessHilo.txtTiempo.setText(""+(this.time--));
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-           
-    }
 }

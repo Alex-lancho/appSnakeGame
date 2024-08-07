@@ -2,14 +2,19 @@ package Interfaz;
 
 import Process.ProcessHilo;
 import Process.Serpiente;
+import javax.swing.JFrame;
 
 public class Frame extends javax.swing.JFrame {
 
     ProcessHilo  proceso;
     
-    public Frame() {
-        this.setExtendedState(Frame.MAXIMIZED_BOTH);
+    
+    public Frame() {        
         initComponents();
+        
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setResizable(true);
+        
         
     }
 
@@ -22,12 +27,12 @@ public class Frame extends javax.swing.JFrame {
         jpCuadro = new javax.swing.JPanel();
         jpSerpiente = new javax.swing.JPanel();
         btnIniciar = new javax.swing.JButton();
-        txtPuntos = new javax.swing.JTextField();
-        txtTiempo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtNivel = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtTiempo = new javax.swing.JLabel();
+        txtPuntos = new javax.swing.JLabel();
+        txtPuntosPerdidos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +77,7 @@ public class Frame extends javax.swing.JFrame {
         jpJuegoLayout.setHorizontalGroup(
             jpJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpJuegoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(290, 290, 290)
                 .addComponent(jpCuadro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jpJuegoLayout.createSequentialGroup()
@@ -82,11 +87,10 @@ public class Frame extends javax.swing.JFrame {
         jpJuegoLayout.setVerticalGroup(
             jpJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpJuegoLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jpCuadro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
                 .addComponent(jpSerpiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGap(145, 145, 145)
+                .addComponent(jpCuadro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         btnIniciar.setText("Iniciar");
@@ -96,9 +100,9 @@ public class Frame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Puntos:");
+        jLabel1.setText("Puntos ganados:");
 
-        jLabel2.setText("Nivel");
+        jLabel2.setText("Puntos Perdidos");
 
         jLabel3.setText("Tiempo:");
 
@@ -114,38 +118,41 @@ public class Frame extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnIniciar)
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
+                        .addGap(57, 57, 57)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(txtPuntosPerdidos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))))
+                        .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnIniciar)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel3))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtPuntosPerdidos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnIniciar)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTiempo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPuntos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -155,14 +162,15 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-       verificacionEstadoBtn();
+       verificacionEstadoBtn();       
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void mauseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mauseMoved
         Serpiente.xObjetivo=evt.getX()-(jpSerpiente.getSize().width/2);
         Serpiente.yObjetivo=evt.getY()-(jpSerpiente.getSize().height/2);
+        System.out.println("x: "+evt.getX()+" y:"+evt.getY());
     }//GEN-LAST:event_mauseMoved
-
+    
     /**
      * @param args the command line arguments
      */
@@ -179,7 +187,7 @@ public class Frame extends javax.swing.JFrame {
             proceso=new ProcessHilo(jpJuego,jpCuadro,jpSerpiente); 
             ProcessHilo.txtTiempo=txtTiempo;
             proceso.start();             
-            ProcessHilo.estadoBtn=true;
+            ProcessHilo.estadoBtn=true;            
        }else{           
            ProcessHilo.estadoBtn=false;
            proceso.setJpPrincipal(jpJuego);
@@ -187,17 +195,21 @@ public class Frame extends javax.swing.JFrame {
            btnIniciar.setText("Iniciar");
        }
     }
-    
+    public  void limpiarFrame(){
+        this.getContentPane().removeAll(); 
+        this.revalidate(); // Recalcula la disposición del JFrame
+        this.repaint(); // Redibuja el JFrame
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jpCuadro;
+    public static javax.swing.JPanel jpCuadro;
     public static javax.swing.JPanel jpJuego;
-    private javax.swing.JPanel jpSerpiente;
-    public static javax.swing.JTextField txtNivel;
-    public static javax.swing.JTextField txtPuntos;
-    private javax.swing.JTextField txtTiempo;
+    public static javax.swing.JPanel jpSerpiente;
+    public static javax.swing.JLabel txtPuntos;
+    public static javax.swing.JLabel txtPuntosPerdidos;
+    private javax.swing.JLabel txtTiempo;
     // End of variables declaration//GEN-END:variables
 }
